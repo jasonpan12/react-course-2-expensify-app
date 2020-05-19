@@ -13,7 +13,7 @@ module.exports = (env) => {
 	return {
 		entry: './src/app.js',
 		output: {
-			path: path.join(__dirname, 'public'),
+			path: path.join(__dirname, 'public', 'dist'),
 			filename: 'bundle.js'
 		},
 		module: {
@@ -44,9 +44,10 @@ module.exports = (env) => {
 			miniCssExtract
 		],
 		devtool: isProduction ? 'source-map' : 'inline-source-map',
-		devServer: {
+		devServer: { // doesn't write to local fsys, uses cache
 			contentBase: path.join(__dirname, 'public'),
-			historyApiFallback: true // serves up index.html for all unspecified routes
+			historyApiFallback: true, // serves up index.html for all unspecified routes
+			publicPath: '/dist/',
 		},
 	};
 };

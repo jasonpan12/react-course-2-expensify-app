@@ -2,7 +2,4 @@ node_modules/
 .DS_store
 yarn-error.log
 .idea/
-public/bundle.js
-public/bundle.js.map
-public/styles.css
-public/styles.css.map
+public/dist/
