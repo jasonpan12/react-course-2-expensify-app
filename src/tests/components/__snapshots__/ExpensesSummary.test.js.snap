@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should display correct summary for one expense 1`] = `
+<h1>
+  Viewing 1 expenses totalling $1.95
+</h1>
+`;
+
+exports[`should display correct summary for two expenses 1`] = `
+<h1>
+  Viewing 2 expenses totalling $1,096.95
+</h1>
+`;

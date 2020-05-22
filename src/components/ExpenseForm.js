@@ -3,8 +3,8 @@ import moment from 'moment';
 import {SingleDatePicker} from 'react-dates';
 
 // const date = new Date();
-const now = moment();
-console.log(now.format('MMM Do, YYYY'));
+// const now = moment();
+// console.log(now.format('MMM Do, YYYY'));
 // set up note state
 // set up on change and value for text area
 
