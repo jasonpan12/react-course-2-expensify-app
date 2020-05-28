@@ -3,15 +3,15 @@ import {shallow} from 'enzyme';
 import {AddExpensePage} from "../../components/AddExpensePage";
 import expenses from "../fixtures/expenses";
 
-let addExpense, history, wrapper;
+let startAddExpense, history, wrapper;
 
 beforeEach(() => {
 	// Define Spies
-	addExpense = jest.fn(); // no const required since initiated above as null
+	startAddExpense = jest.fn(); // no const required since initiated above as null
 	history = {push: jest.fn() }
 
 	// Set up wrapper
-	wrapper = shallow(<AddExpensePage addExpense={addExpense} history={history}/>);
+	wrapper = shallow(<AddExpensePage startAddExpense={startAddExpense} history={history}/>);
 
 })
 
@@ -27,5 +27,5 @@ test('should handle onSubmit', () => {
 
 	// Make assertions
 	expect(history.push).toHaveBeenLastCalledWith('/');
-	expect(addExpense).toHaveBeenLastCalledWith(expenses[1]);
+	expect(startAddExpense).toHaveBeenLastCalledWith(expenses[1]);
 })

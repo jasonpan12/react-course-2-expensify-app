@@ -3,3 +3,5 @@ node_modules/
 yarn-error.log
 .idea/
 public/dist/
+.env.test
+.env.development
