@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import ExpenseForm from "./ExpenseForm";
-import {editExpense, removeExpense} from "../actions/expenses";
+import {editExpense, startRemoveExpense} from "../actions/expenses";
 
 // Refactor EditExpensePage to be a class based component, which will let us pull out the inline fnctions
 // set up mapDispatchToProps editExpense and removeExpense
@@ -26,7 +26,7 @@ export class EditExpensePage extends React.Component {
 
 	onRemove = () => {
 		// dispatch action to removeExpense
-		this.props.removeExpense({id: this.props.expense.id})
+		this.props.startRemoveExpense({id: this.props.expense.id})
 		this.props.history.push('/');
 	}
 
@@ -53,7 +53,7 @@ const mapStateToProps = (state, props) => { // these props can be sent down to t
 
 const mapDispatchToProps = (dispatch, props) => ({
 	editExpense: (id, expense) => dispatch(editExpense(id, expense)),
-	removeExpense: (data) => dispatch(removeExpense(data))
+	startRemoveExpense: (data) => dispatch(startRemoveExpense(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage); // this is the HOC (EditExpensePage), and we can pass new props in
