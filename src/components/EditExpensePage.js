@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import ExpenseForm from "./ExpenseForm";
-import {editExpense, startRemoveExpense} from "../actions/expenses";
+import {startEditExpense, startRemoveExpense} from "../actions/expenses";
 
 // Refactor EditExpensePage to be a class based component, which will let us pull out the inline fnctions
 // set up mapDispatchToProps editExpense and removeExpense
@@ -20,7 +20,7 @@ export class EditExpensePage extends React.Component {
 		// the expense object is provided down in ExpenseForm
 		// dispatch action to edit expense
 		// redirect to dashboard page
-		this.props.editExpense(this.props.expense.id, expense)
+		this.props.startEditExpense(this.props.expense.id, expense)
 		this.props.history.push('/');
 	}
 
@@ -52,7 +52,7 @@ const mapStateToProps = (state, props) => { // these props can be sent down to t
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
-	editExpense: (id, expense) => dispatch(editExpense(id, expense)),
+	startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense)),
 	startRemoveExpense: (data) => dispatch(startRemoveExpense(data))
 })
 
