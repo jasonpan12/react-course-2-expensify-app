@@ -30,6 +30,7 @@ export const startAddExpense = (expenseData = {}) => {
 		})
 	}
 }
+
 // REMOVE_EXPENSE
 export const removeExpense = ({id} = {}) => ({ // destructure object passed in, and destructure empty if no
 	type: 'REMOVE_EXPENSE', // this is the object that is returned, implicitly return an object (don't have to say return)
@@ -42,3 +43,35 @@ export const editExpense = (id, updates) => ({
 	id,
 	updates
 });
+
+// SET_EXPENSES
+export const setExpenses = (expenses) => ({
+	type: 'SET_EXPENSES',
+	expenses
+});
+
+export const startSetExpenses = () => {
+	return (dispatch) => {
+
+		// Set up function to translate snapshot into array
+		const snapshotToArray = (snapshot) => {
+			const expenses = [];
+
+			snapshot.forEach((childSnapshot) => {
+				expenses.push({
+					id: childSnapshot.key, // this is the ID
+					...childSnapshot.val() // get everything else from val
+				});
+			});
+
+			return expenses;
+		};
+
+		return database.ref('expenses')
+			.once('value')
+			.then((snapshot) => {
+				dispatch(setExpenses(snapshotToArray(snapshot)));
+			});
+	}
+};
+
