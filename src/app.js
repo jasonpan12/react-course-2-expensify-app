@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import AppRouter from "./routers/AppRouter";
+import AppRouter, {history} from "./routers/AppRouter";
 import configureStore from "./store/configureStore";
 import {startSetExpenses} from "./actions/expenses";
-import {setTextFilter} from "./actions/filters";
-import getVisibleExpenses from './selectors/expenses'
+import {login, logout} from "./actions/auth";
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import './firebase/firebase';
+import {firebase} from './firebase/firebase';
 // import './playground/promises';
 
 const store = configureStore();
@@ -34,9 +34,37 @@ const jsx = (
 		<AppRouter/>
 	</Provider>
 )
+
+// only render app if it hasn't been rendered yet. cut down on re-renders.
+let hasRendered = false;
+const renderApp = () => {
+	if (!hasRendered) {
+		ReactDOM.render(jsx, document.getElementById('app'));
+		hasRendered = true;
+	}
+}
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
-store.dispatch(startSetExpenses()).then(() => {
-	ReactDOM.render(jsx, document.getElementById('app'));
-});
-
+firebase.auth().onAuthStateChanged((user) => {
+	if (user) {
+		// "Login" needs to be called anytime a user visits a route directly
+		// so that we can set the user ID in the state
+		// This is different from startLogin, which is only called on explicit logins
+		store.dispatch(login(user.uid));
+		// only redirect the user if they are on the login page
+		// user will exist if we do a hard refresh on any routes
+		store.dispatch(startSetExpenses()).then(() => {
+			console.log('uid', user.uid);
+			renderApp()
+			if (history.location.pathname === '/') {
+				history.push('/dashboard');
+			}
+		})
+	} else {
+		store.dispatch(logout());
+		renderApp();
+		history.push('/');
+		console.log('log out');
+	}
+})
