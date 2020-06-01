@@ -21,3 +21,5 @@ git log - view recent commits
 - Production build & deployment with Heroku
 - Dev build & deployment, including sourcemaps
 - Public/private routes
+- backend auth and data security handled by Firebase
+- frontend auth and data security handled by React State (will be blocked by firebase)

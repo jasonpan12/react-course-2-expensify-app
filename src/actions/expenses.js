@@ -8,8 +8,11 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {
-	// return a function
-	return (dispatch) => {
+	// return a function, aka "thunked" action
+	// The inner function receives the store methods dispatch and getState as parameters.
+	// https://github.com/reduxjs/redux-thunk
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
 		const {
 			description = '',
 			note = '',
@@ -21,7 +24,7 @@ export const startAddExpense = (expenseData = {}) => {
 		// Use Firebase SDK to push expense object to 'expenses' ref,
 		// and once complete, dispatch addExpense action to update redux
 		// return the database promise so that we can test with .then
-		return database.ref('expenses').push(expense)
+		return database.ref(`users/${uid}/expenses`).push(expense)
 			.then((ref) => {
 				dispatch(addExpense({
 					id: ref.key,
@@ -39,8 +42,10 @@ export const removeExpense = ({id} = {}) => ({ // destructure object passed in, 
 
 // START REMOVE EXPENSE
 export const startRemoveExpense = ({id} = {}) => {
-	return (dispatch) => {
-		return database.ref(`expenses/${id}`)
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
+
+		return database.ref(`/users/${uid}/expenses/${id}`)
 			.remove()
 			.then(() => {
 				dispatch(removeExpense({id}));
@@ -56,8 +61,10 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = (id, updates) => {
-	return (dispatch) => {
-		return database.ref(`expenses/${id}`)
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
+
+		return database.ref(`/users/${uid}/expenses/${id}`)
 			.update(updates)
 			.then(() => {
 				dispatch(editExpense(id,updates))
@@ -72,8 +79,8 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => {
-	return (dispatch) => {
-
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
 		// Set up function to translate snapshot into array
 		const snapshotToArray = (snapshot) => {
 			const expenses = [];
@@ -88,7 +95,7 @@ export const startSetExpenses = () => {
 			return expenses;
 		};
 
-		return database.ref('expenses')
+		return database.ref(`users/${uid}/expenses`)
 			.once('value')
 			.then((snapshot) => {
 				dispatch(setExpenses(snapshotToArray(snapshot)));
