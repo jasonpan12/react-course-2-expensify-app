@@ -1,0 +1,18 @@
+.button {
+  background: $blue;
+  border: none;
+  color: white;
+  display: inline-block; // Make sure vert margin and padding get used
+  font-size: $font-size-large;
+  line-height: 1; // ensure always 1 line
+  font-weight: 300;
+  padding: $s-size;
+  text-decoration: none; // Remove underline from "buttons"
+}
+
+.button--link {
+  background: none;
+}
+// Create link modifier
+// set up style to remove background
+// Apply base and modified class to logout button

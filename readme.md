@@ -23,3 +23,6 @@ git log - view recent commits
 - Public/private routes
 - backend auth and data security handled by Firebase
 - frontend auth and data security handled by React State (will be blocked by firebase)
+- Where to start reading this code
+- Styling with SASS/SCSS/bem
+- mobile-friendly styling
