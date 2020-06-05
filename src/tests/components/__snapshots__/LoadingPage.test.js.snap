@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render login page that matches snapshot 1`] = `
+<div
+  className="loader"
+>
+  <p>
+    <img
+      className="loader__image"
+      src="/images/loader.gif"
+    />
+  </p>
+</div>
+`;

@@ -7,8 +7,7 @@
 @import './components/page-header';
 @import './components/input-group';
 @import './components/inputs';
-
-// create input-group partial
-// add selectors
-// set up flex-box with space below the group
-// set up right margin for the individual items
+@import './components/form';
+@import './components/visibility';
+@import './components/list';
+@import './components/loader';

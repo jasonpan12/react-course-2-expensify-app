@@ -26,3 +26,6 @@ git log - view recent commits
 - Where to start reading this code
 - Styling with SASS/SCSS/bem
 - mobile-friendly styling
+- conditionally render content based on mobile or desktop experience
+- babel polyfill substitutes unsupported array methods
+- testable with browserstack
