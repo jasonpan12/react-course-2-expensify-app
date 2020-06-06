@@ -1,12 +1,11 @@
-# Git Commands
+# Expensify App
 
-git init - create a new git repo
-git status - view the changes to your project code
-git add - add files to staging area
-git commit - Creates a new commit
-git log - view recent commits
+Demo app to sample modern React ecosystem.
 
-# This app demonstrates
+Test it at
+https://react-course-2-expensify-jpan.herokuapp.com/
+
+# This app uses...
 - ES6 React with JSX
 - Redux State Management
 - React Router
@@ -21,11 +20,8 @@ git log - view recent commits
 - Production build & deployment with Heroku
 - Dev build & deployment, including sourcemaps
 - Public/private routes
-- backend auth and data security handled by Firebase
-- frontend auth and data security handled by React State (will be blocked by firebase)
-- Where to start reading this code
+- Backend auth and data security handled by Firebase
+- Frontend auth and data security handled by React State
 - Styling with SASS/SCSS/bem
-- mobile-friendly styling
-- conditionally render content based on mobile or desktop experience
-- babel polyfill substitutes unsupported array methods
-- testable with browserstack
+- Mobile-friendly styling
+- Babel polyfill for substituting unsupported array methods (use browserstack)
